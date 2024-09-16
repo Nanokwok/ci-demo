@@ -1,5 +1,5 @@
 from unittest import TestCase
-from statistics import variance, stdev
+from statistics import variance, stdev, average
 from math import sqrt
 
 class StatisticsTest(TestCase):
@@ -25,8 +25,35 @@ class StatisticsTest(TestCase):
         # variance([0, 0.5, 1, 1.5, 2.0]) is 0.5
         self.assertEqual(sqrt(0.5), stdev([0, 0.5, 1, 1.5, 2]))
 
+    def test_average_with_empty_list(self):
+        """Test average function with an empty list to ensure ValueError is raised."""
+        with self.assertRaises(ValueError):
+            average([])
 
-if __name__ == '__main__':
-    import unittest
-    unittest.main(verbosity=1)
+    def test_variance_with_empty_list(self):
+        """Test variance function with an empty list to ensure ValueError is raised."""
+        with self.assertRaises(ValueError):
+            variance([])
+
+    def test_stdev_with_empty_list(self):
+        """Test stdev function with an empty list to ensure ValueError is raised."""
+        with self.assertRaises(ValueError):
+            stdev([])
+
+    def test_average_with_non_empty_list(self):
+        """Test average function with a normal list of values."""
+        self.assertEqual(average([1, 2, 3]), 2)
+
+    def test_variance_with_non_empty_list(self):
+        """Test variance function with a normal list of values."""
+        self.assertEqual(variance([1, 2, 3]), 2 / 3)
+
+    def test_stdev_with_non_empty_list(self):
+        """Test standard deviation function with a normal list of values."""
+        self.assertAlmostEqual(stdev([1, 2, 3]), 0.816, places=3)
+
+
+# if __name__ == '__main__':
+#     import unittest
+#     unittest.main(verbosity=1)
 
